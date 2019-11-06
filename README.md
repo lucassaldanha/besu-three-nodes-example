@@ -21,6 +21,14 @@ Example of a network with 3 Besu nodes ready to use private transactions. It con
 * Orion 3 - http://localhost:8883
 * EthSigner - http://localhost:9545
 
+## Accounts ready to send transactions (via EthSigner)
+* 0xfe3b557e8fb62b89f4916b721be55ceb828dbd73
+
+## Keys used
+* Orion 1 Public Key: GGilEkXLaQ9yhhtbpBT03Me9iYa7U/mWXxrJhnbl1XY=
+* Orion 2 Public Key: KkOjNLmCI6r+mICrC6l+XuEDjFEzQllaMQMpWLl4y1s=
+* Orion 3 Public Key: eLb69r4K8/9WviwlfDiZ4jf97P9czyS3DkKu0QYGLjg=
+
 **Example:**
 
 ```
