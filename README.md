@@ -9,6 +9,7 @@ Example of a network with 3 Besu nodes ready to use private transactions. It con
 * Execute `docker-compose up` to start the services
 * Run `./send-private-tx.sh` to send a private transaction. This command will output the hash of the private tx
 * Run `./get-private-tx.sh <HASH>` to get the the private transaction details
+* Run `./purgedb.sh` to purge the database and start your network from scratch
 * See the examples for other requests
 
 ## Network mapping
