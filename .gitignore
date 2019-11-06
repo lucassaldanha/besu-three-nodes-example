@@ -1,0 +1,4 @@
+*.lock
+/data
+./volumes/
+.DS_Store

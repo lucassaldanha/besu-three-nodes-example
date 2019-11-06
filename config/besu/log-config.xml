@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="5">
+  <Properties>
+    <Property name="root.log.level">INFO</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSZZZ} | %t | %-5level | %c{1} | %msg %throwable{short.message}%n" />
+    </Console>
+  </Appenders>
+  <Loggers>
+    <!-- Netty and DevP2P -->
+    <Logger name="org.hyperledger.besu.ethereum.p2p.netty" level="INFO"/>
+    <Logger name="org.hyperledger.besu.ethereum.p2p.netty.NettyPeerConnection" level="INFO"/>
+    <Logger name="org.hyperledger.besu.ethereum.p2p.netty.NettyP2PNetwork" level="INFO"/>
+
+    <!-- Peer Discovery -->
+    <Logger name="org.hyperledger.besu.ethereum.p2p.discovery.internal" level="INFO"/>
+
+    <!-- Permissioning -->
+    <Logger name="org.hyperledger.besu.ethereum.permissioning" level="INFO"/>
+
+    <!-- Privacy -->
+    <Logger name="org.hyperledger.besu.ethereum.privacy" level="INFO"/>
+
+    <!-- TX Mining and Processing -->
+    <Logger name="org.hyperledger.besu.ethereum.core.TransactionPool" level="INFO"/>
+    <Logger name="org.hyperledger.besu.ethereum.mainnet.MainnetTransactionProcessor" level="INFO"/>
+    <Logger name="org.hyperledger.besu.ethereum.blockcreation" level="INFO"/>
+
+    <!-- Syncing -->
+    <Logger name="org.hyperledger.besu.ethereum.eth.sync" level="INFO"/>
+    <Logger name="org.hyperledger.besu.ethereum.eth.sync.BlockPropagationManager" level="INFO"/>
+
+    <!-- RPC APIs -->
+    <Logger name="org.hyperledger.besu.ethereum.jsonrpc" level="INFO"/>
+    <Logger name="org.hyperledger.besu.ethereum.jsonrpc.websocket" level="INFO"/>
+
+    <Root level="${sys:root.log.level}">
+      <AppenderRef ref="Console" />
+    </Root>
+  </Loggers>
+</Configuration>

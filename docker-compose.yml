@@ -1,0 +1,141 @@
+---
+version: '3.4'
+services:
+
+  orion:
+    image: pegasyseng/orion:${ORION_VERSION}
+    volumes:
+      - ./config/orion:/opt/orion/conf/
+      - ./data/orion:/opt/orion/data/
+    command: /opt/orion/bin/orion /opt/orion/conf/orion.conf
+    ports:
+      - 8881:8888
+      - 8081:8080
+    networks:
+      main:
+        ipv4_address: 172.24.2.21
+
+  besu:
+    image: hyperledger/besu:${BESU_VERSION}
+    depends_on:
+      - orion
+    environment:
+      - LOG4J_CONFIGURATION_FILE=/opt/besu/conf/log-config.xml
+    volumes:
+      - ./config/besu:/opt/besu/conf/
+      - ./data/besu:/opt/besu/data/
+    command: [
+      "--config-file=/opt/besu/conf/besu.conf",
+      "--privacy-enabled=${PRIVACY_ENABLED}",
+      "--permissions-accounts-contract-enabled=${PERMISSIONING_ENABLED}",
+      "--permissions-nodes-contract-enabled=${PERMISSIONING_ENABLED}"]
+    ports:
+      - 8515:8545
+      - 8516:8546
+      - 8517:8547
+    networks:
+      main:
+        ipv4_address: 172.24.2.11
+
+  ethsigner:
+    image: pegasyseng/ethsigner:${ETHSIGNER_VERSION}
+    depends_on:
+      - besu
+    volumes:
+      - ./config/ethsigner:/opt/ethsigner/conf/
+    command: [
+      "--chain-id=2018",
+      "--downstream-http-host=172.24.2.11",
+      "--downstream-http-port=8545",
+      "--http-listen-host=0.0.0.0",
+      "--http-listen-port=8545",
+      "file-based-signer",
+      "--key-file=/opt/ethsigner/conf/keyFile",
+      "--password-file=/opt/ethsigner/conf/passwordFile"
+    ]
+    ports:
+      - 9545:8545
+    networks:
+      main:
+        ipv4_address: 172.24.2.30
+
+  orion2:
+    image: pegasyseng/orion:${ORION_VERSION}
+    depends_on:
+      - orion
+    volumes:
+      - ./config/orion2:/opt/orion/conf/
+      - ./data/orion2:/opt/orion/data/
+    command: /opt/orion/bin/orion /opt/orion/conf/orion.conf
+    ports:
+      - 8882:8888
+      - 8082:8080
+    networks:
+      main:
+        ipv4_address: 172.24.2.22
+
+  besu2:
+    image: hyperledger/besu:${BESU_VERSION}
+    depends_on:
+      - orion2
+    environment:
+      - LOG4J_CONFIGURATION_FILE=/opt/besu/conf/log-config.xml
+    volumes:
+      - ./config/besu2:/opt/besu/conf/
+      - ./data/besu2:/opt/besu/data/
+    command: [
+      "--config-file=/opt/besu/conf/besu.conf",
+      "--privacy-enabled=${PRIVACY_ENABLED}",
+      "--permissions-accounts-contract-enabled=${PERMISSIONING_ENABLED}",
+      "--permissions-nodes-contract-enabled=${PERMISSIONING_ENABLED}"]
+    ports:
+      - 8525:8545
+      - 8526:8546
+      - 8527:8547
+    networks:
+      main:
+        ipv4_address: 172.24.2.12
+
+  orion3:
+    image: pegasyseng/orion:${ORION_VERSION}
+    depends_on:
+      - orion
+    volumes:
+      - ./config/orion3:/opt/orion/conf/
+      - ./data/orion3:/opt/orion/data/
+    command: /opt/orion/bin/orion /opt/orion/conf/orion.conf
+    ports:
+      - 8883:8888
+      - 8083:8080
+    networks:
+      main:
+        ipv4_address: 172.24.2.23
+
+  besu3:
+    image: hyperledger/besu:${BESU_VERSION}
+    depends_on:
+      - orion3
+    environment:
+      - LOG4J_CONFIGURATION_FILE=/opt/besu/conf/log-config.xml
+    volumes:
+      - ./config/besu3:/opt/besu/conf/
+      - ./data/besu3:/opt/besu/data/
+    command: [
+      "--config-file=/opt/besu/conf/besu.conf",
+      "--privacy-enabled=${PRIVACY_ENABLED}",
+      "--permissions-accounts-contract-enabled=${PERMISSIONING_ENABLED}",
+      "--permissions-nodes-contract-enabled=${PERMISSIONING_ENABLED}"]
+    ports:
+      - 8535:8545
+      - 8536:8546
+      - 8537:8547
+    networks:
+      main:
+        ipv4_address: 172.24.2.13
+
+networks:
+  main:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.24.2.0/27
