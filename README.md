@@ -11,6 +11,15 @@ Example of a network with 3 Besu nodes ready to use private transactions. It con
 * Run `./get-private-tx.sh <HASH>` to get the the private transaction details
 * See the examples for other requests
 
+## Network mapping
+* Besu 1 - http://localhost:8515
+* Orion 1 - http://localhost:8881
+* Besu 2 - http://localhost:8525
+* Orion 2 - http://localhost:8882
+* Besu 3 - http://localhost:8535
+* Orion 3 - http://localhost:8883
+* EthSigner - http://localhost:9545
+
 **Example:**
 
 ```
