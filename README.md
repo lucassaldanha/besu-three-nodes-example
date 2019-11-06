@@ -1,6 +1,6 @@
 # Besu private txs example
 
-Example of a Besu node ready to use private transactions. It contains:
+Example of a network with 3 Besu nodes ready to use private transactions. It contains:
 * [Orion](https://github.com/PegaSysEng/orion)
 * [Besu](https://github.com/hyperledger/besu/)
 * [EthSigner](https://github.com/PegaSysEng/ethsigner)
@@ -9,6 +9,7 @@ Example of a Besu node ready to use private transactions. It contains:
 * Execute `docker-compose up` to start the services
 * Run `./send-private-tx.sh` to send a private transaction. This command will output the hash of the private tx
 * Run `./get-private-tx.sh <HASH>` to get the the private transaction details
+* See the examples for other requests
 
 **Example:**
 
